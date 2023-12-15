@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/15 19:06:49 by dan              ###   ########.fr       */
+/*   Updated: 2023/12/15 20:42:00 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,7 @@ int	main(int argc, char **argv)
 	while (1)
 	{
 		pause();
-		ft_printf("Starting transfer protocole...\n");
+		// ft_printf("Starting transfer protocole...\n");
 	}
 	return (0);
 }
-
-// to free all when closing prog
-// signal(SIGINT, free_all())

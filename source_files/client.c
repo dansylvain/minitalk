@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/15 19:21:28 by dan              ###   ########.fr       */
+/*   Updated: 2023/12/15 20:39:50 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,42 @@ int	client_parse_args(int argc, char **argv, pid_t *server_pid,
 	return (1);
 }
 
+void	convert_string_length_to_binary(size_t string_length, pid_t server_pid)
+{
+	int	i;
+	int	bit;
+	
+	bit = 0;
+	i = 23;
+	while (i >= 0)
+	{
+		bit = (string_length >> i) & 1;
+		printf("bit: %i\n", bit);
+		if (bit == 0)
+			kill(server_pid, SIGUSR1);
+		else
+			kill(server_pid, SIGUSR2);
+		i--;
+		pause();
+	}
+	ft_printf("string_length: %i\n", string_length);
+}
+
+
+void	transmit_string_length(char string_buff[], pid_t server_pid)
+{
+	int	string_length;
+
+	string_length = ft_strlen(string_buff);
+	convert_string_length_to_binary(string_length, server_pid);
+}
+
 void	transmit_string_buff(char string_buff[], pid_t server_pid)
 {
 	ft_printf("input_string: >%s<\n", string_buff);
 	kill(server_pid, SIGUSR2);
 	pause();
+	transmit_string_length(string_buff, server_pid);
 }
 
 int	main(int argc, char **argv)
