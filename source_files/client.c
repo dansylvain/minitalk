@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/15 17:48:27 by dan              ###   ########.fr       */
+/*   Updated: 2023/12/15 19:21:28 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,13 @@ int	client_parse_args(int argc, char **argv, pid_t *server_pid,
 	return (1);
 }
 
+void	transmit_string_buff(char string_buff[], pid_t server_pid)
+{
+	ft_printf("input_string: >%s<\n", string_buff);
+	kill(server_pid, SIGUSR2);
+	pause();
+}
+
 int	main(int argc, char **argv)
 {
 	pid_t				server_pid;
@@ -42,12 +49,14 @@ int	main(int argc, char **argv)
 	ft_memset(string_buff, '\0', 5000);
 	if (!client_parse_args(argc, argv, &server_pid, string_buff))
 		return (display_error(), 255);
+	if (!initialize_sigaction_struct(&sa_1, &sa_2))
+		return (display_error(), 255);
 	ft_printf("Server PID: %i\n", server_pid);
 	sleep(1);
 	while (1)
 	{
 		if (string_buff[0])
-			ft_printf("input_string: >%s<\n", string_buff);
+			transmit_string_buff(string_buff, server_pid);
 		bytes_read = read(0, string_buff, 5000);
 		if (bytes_read == -1)
 			return (display_error(), 255);

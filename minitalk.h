@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 08:26:17 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/15 17:15:06 by dan              ###   ########.fr       */
+/*   Updated: 2023/12/15 18:41:52 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # include "ft_printf/ft_printf.h"
 
 # define DELAY 1000000
+
+extern	int server_binary;
+extern	int client_binary;
 
 void	display_error(void);
 int		is_valid_pid(char *argv_one);

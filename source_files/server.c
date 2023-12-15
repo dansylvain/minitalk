@@ -6,11 +6,13 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/15 17:49:17 by dan              ###   ########.fr       */
+/*   Updated: 2023/12/15 19:06:49 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minitalk.h"
+
+int server_binary;
 
 /**========================================================================
  * starting the client could be done conditionnaly (with an argument)
