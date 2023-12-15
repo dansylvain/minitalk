@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/14 14:33:27 by dan              ###   ########.fr       */
+/*   Updated: 2023/12/15 17:10:01 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,14 @@ int	main(int argc, char **argv)
 	char	*input_string;
 	char	string_buff[5000];
 	int		bytes_read;
+	struct sigaction	sa_1;
+	struct sigaction	sa_2;
 
 	ft_memset(string_buff, '\0', 5000);
 	if (!client_parse_args(argc, argv, &server_pid, string_buff))
 		return (display_error(), 255);
 	ft_printf("Server PID: %i\n", server_pid);
+	sleep(1);
 	while (1)
 	{
 		if (string_buff[0])
