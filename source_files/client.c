@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/15 17:16:05 by dan              ###   ########.fr       */
+/*   Updated: 2023/12/15 17:48:27 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,6 @@ int	client_parse_args(int argc, char **argv, pid_t *server_pid,
 	else
 		string_buff = NULL;
 	return (1);
-}
-
-void	free_all(char *input_string, int argc)
-{
-	if (input_string && argc < 3)
-		free(input_string);
-	exit(0);
 }
 
 int	main(int argc, char **argv)
