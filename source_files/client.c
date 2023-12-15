@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/15 17:10:01 by dan              ###   ########.fr       */
+/*   Updated: 2023/12/15 17:16:05 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ void	free_all(char *input_string, int argc)
 
 int	main(int argc, char **argv)
 {
-	pid_t	server_pid;
-	char	*input_string;
-	char	string_buff[5000];
-	int		bytes_read;
+	pid_t				server_pid;
+	char				*input_string;
+	char				string_buff[5000];
+	int					bytes_read;
 	struct sigaction	sa_1;
 	struct sigaction	sa_2;
 

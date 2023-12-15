@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 08:26:17 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/15 17:13:04 by dan              ###   ########.fr       */
+/*   Updated: 2023/12/15 17:15:06 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ int		start_client(char *input_string, pid_t server_pid);
 int		initialize_sigaction_struct(struct sigaction *sa_1,
 			struct sigaction *sa_2);
 void	client_signal_handler_1(int signal_number,
-	siginfo_t *info, void *context);
+			siginfo_t *info, void *context);
 void	client_signal_handler_2(int signal_number,
-	siginfo_t *info, void *context);
+			siginfo_t *info, void *context);
 void	server_signal_handler_1(int signal_number, siginfo_t *info,
 			void *context);
 void	server_signal_handler_2(int signal_number, siginfo_t *info,

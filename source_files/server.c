@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/15 17:08:52 by dan              ###   ########.fr       */
+/*   Updated: 2023/12/15 17:15:42 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int	main(int argc, char **argv)
 		return (display_error(), 255);
 	while (1)
 	{
-		
+		ft_printf("Starting transfer protocole...\n");
 	}
 	return (0);
 }
