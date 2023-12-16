@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals_client.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 05:33:41 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/15 18:41:12 by dan              ###   ########.fr       */
+/*   Updated: 2023/12/16 08:58:32 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@ void	client_signal_handler_1(int signal_number,
 	siginfo_t *info, void *context)
 {
 	printf("incoming SIGUSR1\n");
+	usleep(DELAY);
 }
 
 void	client_signal_handler_2(int signal_number,
 	siginfo_t *info, void *context)
 {
 	printf("incoming SIGUSR2\n");
+	usleep(DELAY);
 	
 }

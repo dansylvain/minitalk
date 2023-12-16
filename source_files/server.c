@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/15 20:42:00 by dan              ###   ########.fr       */
+/*   Updated: 2023/12/16 08:57:22 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,10 +109,18 @@ int	main(int argc, char **argv)
 		return (display_error(), 255);
 	if (!start_client(input_string, server_pid))
 		return (display_error(), 255);
+	int i;
 	while (1)
 	{
+		i = 0;
 		pause();
-		// ft_printf("Starting transfer protocole...\n");
+		ft_printf("transefer started\n");
+		while (i < 24)
+		{
+			pause();
+			i++;
+		}
+		ft_printf("\n");
 	}
 	return (0);
 }
