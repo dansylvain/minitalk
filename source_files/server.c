@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/16 18:22:11 by dan              ###   ########.fr       */
+/*   Updated: 2023/12/16 18:47:57 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ int	get_string_length_transmission(void)
 		pause();
 		input_string_length = input_string_length << 1;
 		input_string_length |= g_server_binary[0];
-		ft_printf("f:%i\n", g_server_binary[0]);
+		// ft_printf("f:%i\n", g_server_binary[0]);
 		i--;
 	}
-	ft_printf("\ninput_string_length: %i\n", input_string_length);
+	// ft_printf("\ninput_string_length: %i\n", input_string_length);
 	return (input_string_length);
 }
 
@@ -83,15 +83,15 @@ int	listening_loop(char **input_string)
 
 	while (1)
 	{
-		ft_printf("pause processus\n");
+		// ft_printf("pause processus\n");
 		pause();
-		ft_printf("transfer started\n");
+		// ft_printf("transfer started\n");
 		input_string_len = get_string_length_transmission();
 		ft_printf("input_string_len: %i\n", input_string_len);
 		*input_string = (char *)malloc(sizeof(char) * input_string_len);
 		if (!*input_string)
 			return (0);
-		ft_printf("string freed\n");
+		// ft_printf("string freed\n");
 		free(*input_string);
 	}
 	return (1);
@@ -108,7 +108,7 @@ int	main(int argc, char **argv)
 	if (!server_parse_args(argc, argv, &input_string))
 		return (display_error(), 255);
 	server_pid = getpid();
-	ft_printf("%s\n", input_string);
+	// ft_printf("%s\n", input_string);
 	ft_printf("Server PID: %i\n", server_pid);
 	if (!initialize_sigaction_struct(&sa_1, &sa_2))
 		return (display_error(), 255);

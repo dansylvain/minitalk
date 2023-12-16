@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 06:34:05 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/16 16:11:51 by dan              ###   ########.fr       */
+/*   Updated: 2023/12/16 18:48:21 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	convert_string_length_to_binary(size_t string_length, pid_t server_pid)
 	while (i >= 0)
 	{
 		bit = (string_length >> i) & 1;
-		ft_printf("bit: %i\n", bit);
+		// ft_printf("bit: %i\n", bit);
 		if (bit == 0)
 		{
 			kill(server_pid, SIGUSR1);
