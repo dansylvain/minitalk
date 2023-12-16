@@ -6,7 +6,7 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/16 08:45:55 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/16 12:51:33 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	convert_string_length_to_binary(size_t string_length, pid_t server_pid)
 {
 	int	i;
 	int	bit;
-	
+
 	bit = 0;
 	i = 23;
 	while (i >= 0)
@@ -51,10 +51,9 @@ void	convert_string_length_to_binary(size_t string_length, pid_t server_pid)
 		}
 		i--;
 		usleep(DELAY);
-}
+	}
 	ft_printf("string_length: %i\n", string_length);
 }
-
 
 void	transmit_string_length(char string_buff[], pid_t server_pid)
 {

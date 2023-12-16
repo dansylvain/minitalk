@@ -6,13 +6,13 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/16 11:30:23 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/16 12:48:22 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minitalk.h"
 
-int server_binary;
+int	g_server_binary;
 
 /**========================================================================
  * starting the client could be done conditionnaly (with an argument)
@@ -96,36 +96,52 @@ int	initialize_sigaction_struct(struct sigaction *sa_1, struct sigaction *sa_2)
 // {
 // 	int i;
 // 	int input_int;
-	
 // 	input_int = 0;
 // 	i = 23;
 // 	while (i >= 0)
 // 	{
-		
 // 		pause();
-// 		input_int = (input_int << i) | server_binary;
+// 		input_int = (input_int << i) | g_server_binary;
 // 		printf("m%i\n", input_int);
 // 		i--;
 // 	}
 // 	printf("\nConverted integer: %i\n", input_int);
 // }
 
-void get_input_string_length() {
-    int i;
-    int input_string_length;
-	
-    input_string_length = 0;
-    i = 23;
-    while (i >= 0)
-    {
-        pause(); 
-        input_string_length = input_string_length << 1;
-        input_string_length |= server_binary;
-		ft_printf("f:%i\n", server_binary);
-        i--;
-    }
-    ft_printf("\ninput_string_length: %i\n", input_string_length);
+int	get_string_length_transmission(void)
+{
+	int	i;
+	int	input_string_length;
+
+	input_string_length = 0;
+	i = 23;
+	while (i >= 0)
+	{
+		pause();
+		input_string_length = input_string_length << 1;
+		input_string_length |= g_server_binary;
+		ft_printf("f:%i\n", g_server_binary);
+		i--;
+	}
+	ft_printf("\ninput_string_length: %i\n", input_string_length);
+	return (input_string_length);
 }
+
+// void	get_input_string_transmission(char **input_string, int input_string_len)
+// {
+// 	int i;
+
+// 	ft_memset(*input_string, 'a', input_string_len);
+// 	*input_string[input_string_len] = '\0';
+
+// 	i = 0;
+// 	while (*input_string[i])
+// 	{
+// 		ft_printf("%c\n", *input_string[i]);
+// 		i++;
+// 	}
+
+// }
 
 int	main(int argc, char **argv)
 {
@@ -133,6 +149,7 @@ int	main(int argc, char **argv)
 	pid_t				server_pid;
 	struct sigaction	sa_1;
 	struct sigaction	sa_2;
+	int					input_string_len;
 
 	input_string = NULL;
 	if (!server_parse_args(argc, argv, &input_string))
@@ -146,11 +163,16 @@ int	main(int argc, char **argv)
 		return (display_error(), 255);
 	while (1)
 	{
-		
 		pause();
 		ft_printf("transfer started\n");
-		get_input_string_length();
-		
+		input_string_len = get_string_length_transmission();
+		ft_printf("input_string_len: %i\n", input_string_len);
+		input_string = (char *)malloc(sizeof(char) * input_string_len);
+		if (!input_string)
+			display_error();
+		// input_string[input_string_len] = '\0';
+		// get_input_string_transmission(&input_string, input_string_len);
+		free(input_string);
 	}
 	return (0);
 }

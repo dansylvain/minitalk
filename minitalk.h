@@ -6,7 +6,7 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 08:26:17 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/16 10:40:54 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/16 12:43:24 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@
 # include "get_next_line/get_next_line.h"
 # include "ft_printf/ft_printf.h"
 
-# define DELAY 100000
+# define DELAY 1000
 
-extern	int server_binary;
-extern	int client_binary;
+extern int	g_server_binary;
+extern int	g_client_binary;
 
 void	display_error(void);
 int		is_valid_pid(char *argv_one);

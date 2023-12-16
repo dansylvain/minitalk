@@ -6,7 +6,7 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 05:33:41 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/16 08:58:32 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/16 12:50:16 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,4 @@ void	client_signal_handler_2(int signal_number,
 {
 	printf("incoming SIGUSR2\n");
 	usleep(DELAY);
-	
 }
