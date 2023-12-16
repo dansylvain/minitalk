@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/16 16:12:42 by dan              ###   ########.fr       */
+/*   Updated: 2023/12/16 18:19:38 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	transmit_string_buff(char string_buff[], pid_t server_pid)
 	transmit_string_length(string_buff, server_pid);
 }
 
+// TODO: emission of '\0' to signal End Of Transmission
 int	transmission_loop(char string_buff[], char **input_string, pid_t server_pid)
 {
 	int					bytes_read;

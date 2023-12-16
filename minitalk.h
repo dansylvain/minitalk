@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 08:26:17 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/16 16:15:14 by dan              ###   ########.fr       */
+/*   Updated: 2023/12/16 18:06:30 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 # define DELAY 1000
 
-extern int	g_server_binary;
+extern int	g_server_binary[2];
 extern int	g_client_binary;
 
 void	display_error(void);

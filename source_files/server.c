@@ -6,13 +6,13 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/16 16:16:39 by dan              ###   ########.fr       */
+/*   Updated: 2023/12/16 18:22:11 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minitalk.h"
 
-int	g_server_binary;
+int	g_server_binary[2] = {-1, -1};
 
 /**========================================================================
  * starting the client could be done conditionnaly (with an argument)
@@ -66,14 +66,17 @@ int	get_string_length_transmission(void)
 	{
 		pause();
 		input_string_length = input_string_length << 1;
-		input_string_length |= g_server_binary;
-		ft_printf("f:%i\n", g_server_binary);
+		input_string_length |= g_server_binary[0];
+		ft_printf("f:%i\n", g_server_binary[0]);
 		i--;
 	}
 	ft_printf("\ninput_string_length: %i\n", input_string_length);
 	return (input_string_length);
 }
 
+// TODO: detect End Of Transmission to cancel mask
+// TODO: set g_server_binary[1] = -1 to cancel mask
+// TODO: send a reception confirmation to client after printing message
 int	listening_loop(char **input_string)
 {
 	int					input_string_len;
