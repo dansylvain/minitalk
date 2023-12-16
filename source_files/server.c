@@ -6,7 +6,7 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/16 10:54:46 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/16 11:30:23 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,38 +92,39 @@ int	initialize_sigaction_struct(struct sigaction *sa_1, struct sigaction *sa_2)
 	return (1);
 }
 
-// void	get_input_string_length()
+// void get_input_string_length()
 // {
 // 	int i;
-// 	int input_string_length;
+// 	int input_int;
 	
-// 	input_string_length = 0;
-// 	i = 0;	
-// 	while (i < 24)
+// 	input_int = 0;
+// 	i = 23;
+// 	while (i >= 0)
 // 	{
-// 		input_string_length = (input_string_length << i) |(server_binary & 1);
-// 		i++;
+		
 // 		pause();
+// 		input_int = (input_int << i) | server_binary;
+// 		printf("m%i\n", input_int);
+// 		i--;
 // 	}
-// 	ft_printf("\ninput_string_length: %i\n", input_string_length);
-// 	// return (input_string_length);
+// 	printf("\nConverted integer: %i\n", input_int);
 // }
 
-void get_input_string_length()
-{
-	int i;
-	int input_int;
-	// pause();
+void get_input_string_length() {
+    int i;
+    int input_string_length;
 	
-	input_int = 0;
-	for (i = 0; i < 24; i++)
-	{
-		input_int = (input_int << 1) | (server_binary & 1);
-		pause();
-
-	}
-	
-	printf("Converted integer: %d\n", input_int);
+    input_string_length = 0;
+    i = 23;
+    while (i >= 0)
+    {
+        pause(); 
+        input_string_length = input_string_length << 1;
+        input_string_length |= server_binary;
+		ft_printf("f:%i\n", server_binary);
+        i--;
+    }
+    ft_printf("\ninput_string_length: %i\n", input_string_length);
 }
 
 int	main(int argc, char **argv)
