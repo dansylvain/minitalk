@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/16 12:48:22 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/16 16:16:39 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,28 +32,6 @@ int	server_parse_args(int argc, char **argv, char **input_string)
 	return (1);
 }
 
-void	build_command_string(char command[], char *server_pid_str,
-	char *input_string)
-{
-	char	quote[2];
-	char	space[2];
-
-	quote[0] = '\"';
-	quote[1] = '\0';
-	space[0] = ' ';
-	space[1] = '\0';
-	ft_strlcat(command, "./client ", 10);
-	ft_strlcat(command, server_pid_str, 10 + ft_strlen(server_pid_str));
-	if (input_string)
-	{
-		ft_strlcat(command, space, ft_strlen(command) + 2);
-		ft_strlcat(command, quote, ft_strlen(command) + 2);
-		ft_strlcat(command, input_string, ft_strlen(command)
-			+ ft_strlen(input_string) + 1);
-		ft_strlcat(command, quote, ft_strlen(command) + 2);
-	}
-}
-
 int	start_client(char *input_string, pid_t server_pid)
 {
 	pid_t	child_pid;
@@ -77,37 +55,6 @@ int	start_client(char *input_string, pid_t server_pid)
 	return (1);
 }
 
-int	initialize_sigaction_struct(struct sigaction *sa_1, struct sigaction *sa_2)
-{
-	sa_1->sa_sigaction = server_signal_handler_1;
-	sigemptyset(&sa_1->sa_mask);
-	sa_1->sa_flags = SA_SIGINFO;
-	sa_2->sa_sigaction = server_signal_handler_2;
-	sigemptyset(&sa_2->sa_mask);
-	sa_2->sa_flags = SA_SIGINFO;
-	if (sigaction(SIGUSR1, sa_1, NULL) == -1)
-		return (0);
-	if (sigaction(SIGUSR2, sa_2, NULL) == -1)
-		return (0);
-	return (1);
-}
-
-// void get_input_string_length()
-// {
-// 	int i;
-// 	int input_int;
-// 	input_int = 0;
-// 	i = 23;
-// 	while (i >= 0)
-// 	{
-// 		pause();
-// 		input_int = (input_int << i) | g_server_binary;
-// 		printf("m%i\n", input_int);
-// 		i--;
-// 	}
-// 	printf("\nConverted integer: %i\n", input_int);
-// }
-
 int	get_string_length_transmission(void)
 {
 	int	i;
@@ -127,21 +74,25 @@ int	get_string_length_transmission(void)
 	return (input_string_length);
 }
 
-// void	get_input_string_transmission(char **input_string, int input_string_len)
-// {
-// 	int i;
+int	listening_loop(char **input_string)
+{
+	int					input_string_len;
 
-// 	ft_memset(*input_string, 'a', input_string_len);
-// 	*input_string[input_string_len] = '\0';
-
-// 	i = 0;
-// 	while (*input_string[i])
-// 	{
-// 		ft_printf("%c\n", *input_string[i]);
-// 		i++;
-// 	}
-
-// }
+	while (1)
+	{
+		ft_printf("pause processus\n");
+		pause();
+		ft_printf("transfer started\n");
+		input_string_len = get_string_length_transmission();
+		ft_printf("input_string_len: %i\n", input_string_len);
+		*input_string = (char *)malloc(sizeof(char) * input_string_len);
+		if (!*input_string)
+			return (0);
+		ft_printf("string freed\n");
+		free(*input_string);
+	}
+	return (1);
+}
 
 int	main(int argc, char **argv)
 {
@@ -149,7 +100,6 @@ int	main(int argc, char **argv)
 	pid_t				server_pid;
 	struct sigaction	sa_1;
 	struct sigaction	sa_2;
-	int					input_string_len;
 
 	input_string = NULL;
 	if (!server_parse_args(argc, argv, &input_string))
@@ -161,18 +111,7 @@ int	main(int argc, char **argv)
 		return (display_error(), 255);
 	if (!start_client(input_string, server_pid))
 		return (display_error(), 255);
-	while (1)
-	{
-		pause();
-		ft_printf("transfer started\n");
-		input_string_len = get_string_length_transmission();
-		ft_printf("input_string_len: %i\n", input_string_len);
-		input_string = (char *)malloc(sizeof(char) * input_string_len);
-		if (!input_string)
-			display_error();
-		// input_string[input_string_len] = '\0';
-		// get_input_string_transmission(&input_string, input_string_len);
-		free(input_string);
-	}
+	if (!listening_loop(&input_string))
+		return (display_error(), 255);
 	return (0);
 }
