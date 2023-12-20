@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/16 18:47:57 by dan              ###   ########.fr       */
+/*   Updated: 2023/12/20 12:40:58 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minitalk.h"
 
-int	g_server_binary[2] = {-1, -1};
+int	g_server_binary = -1;
 
 /**========================================================================
  * starting the client could be done conditionnaly (with an argument)
@@ -66,8 +66,8 @@ int	get_string_length_transmission(void)
 	{
 		pause();
 		input_string_length = input_string_length << 1;
-		input_string_length |= g_server_binary[0];
-		// ft_printf("f:%i\n", g_server_binary[0]);
+		input_string_length |= g_server_binary;
+		// ft_printf("f:%i\n", g_server_binary);
 		i--;
 	}
 	// ft_printf("\ninput_string_length: %i\n", input_string_length);
@@ -75,7 +75,7 @@ int	get_string_length_transmission(void)
 }
 
 // TODO: detect End Of Transmission to cancel mask
-// TODO: set g_server_binary[1] = -1 to cancel mask
+// TODO: set client_pid = -1 to cancel mask
 // TODO: send a reception confirmation to client after printing message
 int	listening_loop(char **input_string)
 {
