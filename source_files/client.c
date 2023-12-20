@@ -6,11 +6,13 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/16 18:46:39 by dan              ###   ########.fr       */
+/*   Updated: 2023/12/20 19:48:20 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minitalk.h"
+
+int	g_client_binary = 0;
 
 int	client_parse_args(int argc, char **argv, pid_t *server_pid,
 	char string_buff[])
@@ -32,9 +34,7 @@ int	client_parse_args(int argc, char **argv, pid_t *server_pid,
 
 void	transmit_string_buff(char string_buff[], pid_t server_pid)
 {
-	// ft_printf("input_string: >%s<\n", string_buff);
-	kill(server_pid, SIGUSR2);
-	usleep(DELAY);
+	ft_printf("input_string: >%s<\n", string_buff);
 	transmit_string_length(string_buff, server_pid);
 }
 
@@ -68,6 +68,7 @@ int	main(int argc, char **argv)
 	struct sigaction	sa_2;
 
 	ft_memset(string_buff, '\0', 5000);
+	ft_printf("client_pid: %i\n", getpid());
 	if (!client_parse_args(argc, argv, &server_pid, string_buff))
 		return (display_error(), 255);
 	if (!initialize_sigaction_struct(&sa_1, &sa_2))

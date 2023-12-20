@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 07:22:27 by dan               #+#    #+#             */
-/*   Updated: 2023/12/20 17:56:31 by dan              ###   ########.fr       */
+/*   Updated: 2023/12/20 20:01:03 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,26 @@
 void	server_signal_handler(int signal_number,
 	siginfo_t *info, void *context)
 {
-	static int client_pid = 0;
+	g_server_binary[0] = 0;
 
-	if (client_pid == 0)
-		client_pid = info->si_pid;
+	if (g_server_binary[0] == 0)
+	{
+		g_server_binary[1] = info->si_pid;
+		// ft_printf("info->booms: >%i<\n", g_server_binary[1]);
+	}
 	
-	if (client_pid == info->si_pid)
+	if (g_server_binary[1] == info->si_pid)
 	{
 		if (signal_number == 10)
+		{
 			g_server_binary[0] = 0;
+			ft_printf("SIGUSR1\n");
+		}
 		else
+		{
 			g_server_binary[0] = 1;
+			ft_printf("SIGUSR2\n");
+		}
 	}
-	kill(info->si_pid, SIGUSR2);
+	
 }
