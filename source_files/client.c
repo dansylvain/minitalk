@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/21 13:08:36 by dan              ###   ########.fr       */
+/*   Updated: 2023/12/21 15:43:08 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	client_parse_args(int argc, char **argv, pid_t *server_pid,
 
 void	transmit_string_buff(char string_buff[], pid_t server_pid)
 {
+	kill(server_pid, SIGUSR2);
+	ft_printf(">SIGUSR2\n");
 	ft_printf("input_string: >%s<\n", string_buff);
 	transmit_string_length(string_buff, server_pid);
 }
@@ -76,11 +78,18 @@ int	transmission_loop(char string_buff[], char **input_string, pid_t server_pid)
 	{
 		if (string_buff[0])
 			transmit_string_buff(string_buff, server_pid);
+		usleep(300); // to avoid read interruption by signal
 		bytes_read = read(0, string_buff, 5000);
 		if (bytes_read == -1)
+		{
+			// ft_printf("bytes_read == -1\n");
 			return (0);
+		}
 		else if (bytes_read == 0 || !string_buff[0])
-			return (0);
+			{
+				// ft_printf("bytes_read == 0 || !string_buff[0]\n");
+				return (0);
+			}
 		else
 			string_buff[bytes_read] = '\0';
 		input_string = NULL;
