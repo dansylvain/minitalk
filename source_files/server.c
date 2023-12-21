@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/21 13:01:54 by dan              ###   ########.fr       */
+/*   Updated: 2023/12/21 15:59:08 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ int	get_string_length_transmission(void)
 			input_string_length |= g_server_binary[0];
 			g_server_binary[0] = -1;
 			kill(g_server_binary[1], SIGUSR2);
-			// ft_printf("g_server_binary[1]: >%i<\n", g_server_binary[1]);
+			usleep(500);
+			ft_printf("> SIGUSR2\n");
 		}
 		i--;
 	}
@@ -93,9 +94,9 @@ int	listening_loop(char **input_string)
 		ft_printf("after witing loop\n");
 		g_server_binary[0] = -1;
 		
-		ft_printf("emit SIUSR2\n");
 		kill(g_server_binary[1], SIGUSR2);
-
+		usleep(500);
+		ft_printf("> SIGUSR2\n");
 		// ft_printf("transfer started\n");
 		
 		input_string_len = get_string_length_transmission();

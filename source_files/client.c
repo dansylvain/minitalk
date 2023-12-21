@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/21 15:43:08 by dan              ###   ########.fr       */
+/*   Updated: 2023/12/21 15:58:00 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@ int	client_parse_args(int argc, char **argv, pid_t *server_pid,
 void	transmit_string_buff(char string_buff[], pid_t server_pid)
 {
 	kill(server_pid, SIGUSR2);
-	ft_printf(">SIGUSR2\n");
-	ft_printf("input_string: >%s<\n", string_buff);
+	usleep(500);
+	ft_printf("> SIGUSR2\n");
+	// ft_printf("input_string: >%s<\n", string_buff);
 	transmit_string_length(string_buff, server_pid);
 }
 
@@ -55,18 +56,21 @@ void	transmit_string_length(char string_buff[], pid_t server_pid)
 		if (bit == 0 && g_client_binary == 0)
 		{
 			kill(server_pid, SIGUSR1);
-			ft_printf("client > SIGUSR1\n");
+			usleep(500);
+			ft_printf("> SIGUSR1\n");
 			g_client_binary = 1;
 		}
 		else if (bit == 1 && g_client_binary == 0)
 		{
 			kill(server_pid, SIGUSR2);
-			ft_printf("client > SIGUSR2\n");
+			usleep(500);
+			ft_printf("> SIGUSR2\n");
+			// ft_printf("client > SIGUSR2\n");
 			g_client_binary = 1;
 		}
 		i--;
 	}
-	ft_printf("mon ami string_length: %i\n", string_length);
+	// ft_printf("mon ami string_length: %i\n", string_length);
 }
 
 // TODO: emission of '\0' to signal End Of Transmission
