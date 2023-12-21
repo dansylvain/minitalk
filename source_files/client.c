@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/20 19:48:20 by dan              ###   ########.fr       */
+/*   Updated: 2023/12/21 13:08:36 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,35 @@ void	transmit_string_buff(char string_buff[], pid_t server_pid)
 {
 	ft_printf("input_string: >%s<\n", string_buff);
 	transmit_string_length(string_buff, server_pid);
+}
+
+void	transmit_string_length(char string_buff[], pid_t server_pid)
+{
+	int	string_length;
+	int	i;
+	int	bit;
+	
+	string_length = ft_strlen(string_buff);
+	bit = 0;
+	i = 23;
+	while (i >= 0)
+	{
+		bit = (string_length >> i) & 1;
+		if (bit == 0 && g_client_binary == 0)
+		{
+			kill(server_pid, SIGUSR1);
+			ft_printf("client > SIGUSR1\n");
+			g_client_binary = 1;
+		}
+		else if (bit == 1 && g_client_binary == 0)
+		{
+			kill(server_pid, SIGUSR2);
+			ft_printf("client > SIGUSR2\n");
+			g_client_binary = 1;
+		}
+		i--;
+	}
+	ft_printf("mon ami string_length: %i\n", string_length);
 }
 
 // TODO: emission of '\0' to signal End Of Transmission

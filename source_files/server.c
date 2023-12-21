@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/20 20:10:34 by dan              ###   ########.fr       */
+/*   Updated: 2023/12/21 13:01:54 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,13 @@ int	listening_loop(char **input_string)
 
 	while (1)
 	{
-		// ft_printf("pause processus\n");
+		ft_printf("enter listening loop\n");
 		while (g_server_binary[0] == -1);
 		
-		ft_printf("out of loop\n");
+		ft_printf("after witing loop\n");
 		g_server_binary[0] = -1;
+		
+		ft_printf("emit SIUSR2\n");
 		kill(g_server_binary[1], SIGUSR2);
 
 		// ft_printf("transfer started\n");
