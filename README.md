@@ -8,10 +8,4 @@ Je suis en train de mettre un protocole de transmission entre le serveur et le c
 - le transfert des caractères
 - une confirmation de réception par le serveur une fois la transmission terminée.
 
-
-Refactor du code:
-Il faut que je pense a une nouvelle facon d'organiser la sequentioalisation de la communication entre les processus.
-les handler fonctions devraient appeler directement les fonctions responsables des actions sur les donnees. Ce n'est pas a elles de reagir aux signaux rentrant. Comment faire cela? Avec la manipulation de variables?
-Mettre au point des fonctions pour manipuler des variables selon les signaux rentrant. Les tester, et les brancher entre elles.
-
-Le travil de demain: faire un plan complet des fonctions et de leurs interdependances...
+La derniere etape de la transmission va etre la plus laborieuse. Transmettre les caracteres bit par bit depuis le client. Avec tout ce que ca implique de confirmations de la part du serveur...
