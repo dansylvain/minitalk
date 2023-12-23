@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 08:26:17 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/16 18:06:30 by dan              ###   ########.fr       */
+/*   Updated: 2023/12/20 17:52:09 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	client_signal_handler_1(int signal_number,
 			siginfo_t *info, void *context);
 void	client_signal_handler_2(int signal_number,
 			siginfo_t *info, void *context);
-void	server_signal_handler_1(int signal_number, siginfo_t *info,
+void	server_signal_handler(int signal_number, siginfo_t *info,
 			void *context);
 void	server_signal_handler_2(int signal_number, siginfo_t *info,
 			void *context);

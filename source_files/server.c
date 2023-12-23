@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/16 18:47:57 by dan              ###   ########.fr       */
+/*   Updated: 2023/12/23 11:43:11 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minitalk.h"
 
-int	g_server_binary[2] = {-1, -1};
+int	g_server_binary[2] = {-1, 0};
 
 /**========================================================================
  * starting the client could be done conditionnaly (with an argument)
@@ -64,10 +64,16 @@ int	get_string_length_transmission(void)
 	i = 23;
 	while (i >= 0)
 	{
-		pause();
-		input_string_length = input_string_length << 1;
-		input_string_length |= g_server_binary[0];
-		// ft_printf("f:%i\n", g_server_binary[0]);
+		if (g_server_binary[0] != -1)
+		{
+			input_string_length = input_string_length << 1;
+			input_string_length |= g_server_binary[0];
+			g_server_binary[0] = -1;
+			kill(g_server_binary[1], SIGUSR2);
+			ft_printf("emitting SIGUSR2\n");
+
+			// ft_printf("g_server_binary[1]: >%i<\n", g_server_binary[1]);
+		}
 		i--;
 	}
 	// ft_printf("\ninput_string_length: %i\n", input_string_length);
@@ -75,7 +81,7 @@ int	get_string_length_transmission(void)
 }
 
 // TODO: detect End Of Transmission to cancel mask
-// TODO: set g_server_binary[1] = -1 to cancel mask
+// TODO: set client_pid = -1 to cancel mask
 // TODO: send a reception confirmation to client after printing message
 int	listening_loop(char **input_string)
 {
@@ -83,16 +89,28 @@ int	listening_loop(char **input_string)
 
 	while (1)
 	{
-		// ft_printf("pause processus\n");
-		pause();
-		// ft_printf("transfer started\n");
-		input_string_len = get_string_length_transmission();
-		ft_printf("input_string_len: %i\n", input_string_len);
-		*input_string = (char *)malloc(sizeof(char) * input_string_len);
-		if (!*input_string)
-			return (0);
-		// ft_printf("string freed\n");
-		free(*input_string);
+		ft_printf("pause processus until signal is reveived\n");
+		while (g_server_binary[0] == -1);
+		g_server_binary[0] = -1;
+		ft_printf("g_server_binary: %i\n", g_server_binary[1]);
+		kill(g_server_binary[1], SIGUSR2);
+		ft_printf("emitting SIGUSR2\n");
+		ft_printf("loop started\n");
+
+
+		// // ft_printf("out of loop\n");
+		// g_server_binary[0] = -1;
+		// kill(g_server_binary[1], SIGUSR2);
+
+		// // ft_printf("transfer started\n");
+		
+		// input_string_len = get_string_length_transmission();
+		// ft_printf("input_string_len: %i\n", input_string_len);
+		// *input_string = (char *)malloc(sizeof(char) * input_string_len);
+		// if (!*input_string)
+		// 	return (0);
+		// // ft_printf("string freed\n");
+		// free(*input_string);
 	}
 	return (1);
 }

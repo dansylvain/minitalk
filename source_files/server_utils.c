@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 05:47:16 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/16 16:15:49 by dan              ###   ########.fr       */
+/*   Updated: 2023/12/20 12:32:02 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	display_error(void)
 
 int	initialize_sigaction_struct(struct sigaction *sa_1, struct sigaction *sa_2)
 {
-	sa_1->sa_sigaction = server_signal_handler_1;
+	sa_1->sa_sigaction = server_signal_handler;
 	sigemptyset(&sa_1->sa_mask);
 	sa_1->sa_flags = SA_SIGINFO;
-	sa_2->sa_sigaction = server_signal_handler_2;
+	sa_2->sa_sigaction = server_signal_handler;
 	sigemptyset(&sa_2->sa_mask);
 	sa_2->sa_flags = SA_SIGINFO;
 	if (sigaction(SIGUSR1, sa_1, NULL) == -1)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 06:34:05 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/16 18:48:21 by dan              ###   ########.fr       */
+/*   Updated: 2023/12/23 11:01:07 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,35 +55,4 @@ int	initialize_sigaction_struct(struct sigaction *sa_1, struct sigaction *sa_2)
 	return (1);
 }
 
-void	convert_string_length_to_binary(size_t string_length, pid_t server_pid)
-{
-	int	i;
-	int	bit;
 
-	bit = 0;
-	i = 23;
-	while (i >= 0)
-	{
-		bit = (string_length >> i) & 1;
-		// ft_printf("bit: %i\n", bit);
-		if (bit == 0)
-		{
-			kill(server_pid, SIGUSR1);
-		}
-		else if (bit == 1)
-		{
-			kill(server_pid, SIGUSR2);
-		}
-		i--;
-		usleep(DELAY);
-	}
-	ft_printf("string_length: %i\n", string_length);
-}
-
-void	transmit_string_length(char string_buff[], pid_t server_pid)
-{
-	int	string_length;
-
-	string_length = ft_strlen(string_buff);
-	convert_string_length_to_binary(string_length, server_pid);
-}
