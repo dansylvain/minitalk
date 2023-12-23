@@ -6,7 +6,7 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/23 17:17:05 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/23 17:27:21 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	start_client(char *input_string, pid_t server_pid)
 	return (1);
 }
 
+//! I used usleep(300) after signal emission to fix issues
 int	get_string_length_transmission(void)
 {
 	int	i;
@@ -92,13 +93,12 @@ int	listening_loop(char **input_string)
 		}
 		g_server_binary[0] = -1;
 		kill(g_server_binary[1], SIGUSR2);
-		usleep(300);
 		input_string_len = get_string_length_transmission();
-		*input_string = (char *)malloc(sizeof(char) * input_string_len);
+		ft_printf("input_string_len: %i\n", input_string_len);
+		*input_string = (char *)ft_calloc(input_string_len, sizeof(char));
 		if (!*input_string)
 			return (0);
 		kill(g_server_binary[1], SIGUSR2);
-		usleep(300);
 		free(*input_string);
 	}
 	return (1);

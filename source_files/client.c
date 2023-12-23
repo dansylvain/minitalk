@@ -6,7 +6,7 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/23 17:14:05 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/23 17:21:36 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	transmission_loop(char string_buff[], char **input_string, pid_t server_pid)
 	{
 		if (string_buff[0])
 			transmit_string_buff(string_buff, server_pid);
-		ft_printf("wait for input > ");
+		ft_printf("> ");
 		bytes_read = read(0, string_buff, 100000);
 		if (bytes_read == -1)
 			return (0);
