@@ -6,7 +6,7 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/23 17:21:36 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/23 18:17:24 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	client_parse_args(int argc, char **argv, pid_t *server_pid,
 	return (1);
 }
 
-void	transmit_string_length(char string_buff[], pid_t server_pid)
+int	transmit_string_length(char string_buff[], pid_t server_pid)
 {
 	int	string_length;
 	int	i;
@@ -58,20 +58,64 @@ void	transmit_string_length(char string_buff[], pid_t server_pid)
 		g_client_binary = 0;
 		i--;
 	}
+	ft_printf("string length : %i\n", string_length);
+	return (string_length);
+}
+
+void	transmit_char(char octet, int server_pid)
+{
+	int	i;
+	int	bit;
+
+	i = 7;
+	bit = 0;
+	while (i >= 0)
+	{
+		g_client_binary = 0;
+		bit = (octet >> i) & 1;
+		if (bit == 0)
+		{
+			kill(server_pid, SIGUSR1);
+			wait_signal();
+		}
+		else if (bit == 1)
+		{
+			kill(server_pid, SIGUSR2);
+			wait_signal();
+		}
+		g_client_binary = 0;
+		i--;
+	}
+}
+
+void	transmit_string(char string_buff[], pid_t server_pid, int string_length)
+{
+	int	i;
+
+	i = 0;
+	while (string_buff[i])
+	{
+		transmit_char(string_buff[i], server_pid);
+		ft_printf("%c", string_buff[i]);
+		i++;
+	}
 }
 
 void	transmit_string_buff(char string_buff[], pid_t server_pid)
 {
+	int	string_length;
+
+	string_length = 0;
 	while (g_client_binary == 0)
 	{
 		kill(server_pid, SIGUSR2);
 		usleep(300);
 	}
 	g_client_binary = 0;
-	transmit_string_length(string_buff, server_pid);
-	while (g_client_binary == 0)
-	{
-	}
+	string_length = transmit_string_length(string_buff, server_pid);
+	wait_signal();
+	// transmit_string(string_buff, server_pid, string_length);
+	// ft_printf("transmit data\n");
 	g_client_binary = 0;
 }
 

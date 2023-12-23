@@ -6,7 +6,7 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/23 17:27:21 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/23 18:18:19 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,17 @@ int	get_string_length_transmission(void)
 	return (input_string_length);
 }
 
+void	get_input_string_transmission(char **input_string)
+{
+	*input_string[0] = 'y';
+}
+
 // TODO: detect End Of Transmission to cancel mask
 // TODO: set client_pid = -1 to cancel mask
 // TODO: send a reception confirmation to client after printing message
 int	listening_loop(char **input_string)
 {
-	int					input_string_len;
+	int	input_string_len;
 
 	while (1)
 	{
@@ -95,11 +100,20 @@ int	listening_loop(char **input_string)
 		kill(g_server_binary[1], SIGUSR2);
 		input_string_len = get_string_length_transmission();
 		ft_printf("input_string_len: %i\n", input_string_len);
-		*input_string = (char *)ft_calloc(input_string_len, sizeof(char));
-		if (!*input_string)
-			return (0);
+		if (input_string_len)
+		{
+			*input_string = (char *)ft_calloc(input_string_len, sizeof(char));
+			if (!*input_string)
+				return (0);
+			ft_memset(*input_string, 'a', input_string_len);
+		}
+		else
+			*input_string = NULL;
 		kill(g_server_binary[1], SIGUSR2);
-		free(*input_string);
+		// get_input_string_transmission(input_string);
+		// ft_printf("%s", *input_string);
+		if (*input_string)
+			free(*input_string);
 	}
 	return (1);
 }
