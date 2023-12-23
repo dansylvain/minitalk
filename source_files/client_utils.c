@@ -6,7 +6,7 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 06:34:05 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/23 11:48:35 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/23 17:15:05 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,9 @@ int	initialize_sigaction_struct(struct sigaction *sa_1, struct sigaction *sa_2)
 	return (1);
 }
 
-
+void	wait_signal(void)
+{
+	while (g_client_binary == 0)
+	{
+	}
+}

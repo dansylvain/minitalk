@@ -6,7 +6,7 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/23 16:42:21 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/23 17:17:05 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,19 +60,18 @@ int	get_string_length_transmission(void)
 	int	i;
 	int	input_string_length;
 
-	// ft_printf("get_string_length_transmission\n");
 	input_string_length = 0;
 	i = 23;
 	while (i >= 0)
 	{
-		while (g_server_binary[0] == -1);
-		
+		while (g_server_binary[0] == -1)
+		{
+		}
 		input_string_length = input_string_length << 1;
 		input_string_length |= g_server_binary[0];
 		g_server_binary[0] = -1;
 		kill(g_server_binary[1], SIGUSR2);
 		usleep(300);
-		// ft_printf("emitting SIGUSR1\n");		
 		i--;
 	}
 	return (input_string_length);
@@ -88,19 +87,13 @@ int	listening_loop(char **input_string)
 	while (1)
 	{
 		input_string_len = 0;
-		// ft_printf("start loop %i\n", g_server_binary[0]);
-		
-		
-
-		while (g_server_binary[0] == -1);
+		while (g_server_binary[0] == -1)
+		{
+		}
 		g_server_binary[0] = -1;
 		kill(g_server_binary[1], SIGUSR2);
-		// ft_printf("emitting SIGUSR2\n");
 		usleep(300);
 		input_string_len = get_string_length_transmission();
-		ft_printf("input_string_length: %i\n", input_string_len);
-		// ft_printf("g_server_binary[0]: %i\n", g_server_binary[0]);
-		
 		*input_string = (char *)malloc(sizeof(char) * input_string_len);
 		if (!*input_string)
 			return (0);
@@ -122,7 +115,6 @@ int	main(int argc, char **argv)
 	if (!server_parse_args(argc, argv, &input_string))
 		return (display_error(), 255);
 	server_pid = getpid();
-	// ft_printf("%s\n", input_string);
 	ft_printf("Server PID: %i\n", server_pid);
 	if (!initialize_sigaction_struct(&sa_1, &sa_2))
 		return (display_error(), 255);

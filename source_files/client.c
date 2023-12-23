@@ -6,7 +6,7 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/23 16:35:22 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/23 17:14:05 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,7 @@ void	transmit_string_length(char string_buff[], pid_t server_pid)
 	int	string_length;
 	int	i;
 	int	bit;
-	
-	// ft_printf("transfer string_length");
-	// ft_printf("g_client_binary: %i\n", g_client_binary);
-	
+
 	string_length = ft_strlen(string_buff) - 1;
 	bit = 0;
 	i = 23;
@@ -51,74 +48,31 @@ void	transmit_string_length(char string_buff[], pid_t server_pid)
 		if (bit == 0)
 		{
 			kill(server_pid, SIGUSR1);
-			while(g_client_binary == 0);
-			// ft_printf("emitting SIGUSR1\n");
+			wait_signal();
 		}
 		else if (bit == 1)
 		{
 			kill(server_pid, SIGUSR2);
-			while(g_client_binary == 0);
-			// ft_printf("emitting SIGUSR2\n");
+			wait_signal();
 		}
 		g_client_binary = 0;
 		i--;
 	}
-	ft_printf("string_length: %i\n", string_length);
 }
-
-// void	transmit_string(string_buff, server_pid)
-// {
-// 	int	string_length;
-// 	int	i;
-// 	int	bit;
-	
-// 	// ft_printf("transfer string_length");
-// 	// ft_printf("g_client_binary: %i\n", g_client_binary);
-	
-// 	string_length = ft_strlen(string_buff);
-// 	bit = 0;
-// 	i = 23;
-// 	while (i >= 0)
-// 	{
-// 		g_client_binary = 0;
-// 		bit = (string_length >> i) & 1;
-// 		if (bit == 0)
-// 		{
-// 			kill(server_pid, SIGUSR1);
-// 			while(g_client_binary == 0);
-// 			// ft_printf("emitting SIGUSR1\n");
-// 		}
-// 		else if (bit == 1)
-// 		{
-// 			kill(server_pid, SIGUSR2);
-// 			while(g_client_binary == 0);
-// 			// ft_printf("emitting SIGUSR2\n");
-// 		}
-// 		g_client_binary = 0;
-// 		i--;
-// 	}
-
-	
-
-// }
 
 void	transmit_string_buff(char string_buff[], pid_t server_pid)
 {
-	// ft_printf("try connecting\n");
 	while (g_client_binary == 0)
 	{
 		kill(server_pid, SIGUSR2);
-		// ft_printf("emitting SIGUSR2\n");
 		usleep(300);
 	}
 	g_client_binary = 0;
-	// ft_printf("connected to server\n");
-	
 	transmit_string_length(string_buff, server_pid);
-	while (g_client_binary == 0);
+	while (g_client_binary == 0)
+	{
+	}
 	g_client_binary = 0;
-	// transmit_string(string_buff, server_pid);
-	// ft_printf("transmit message\n");
 }
 
 // TODO: emission of '\0' to signal End Of Transmission
@@ -142,7 +96,6 @@ int	transmission_loop(char string_buff[], char **input_string, pid_t server_pid)
 		else
 			string_buff[bytes_read] = '\0';
 		input_string = NULL;
-		
 	}
 	return (1);
 }
@@ -161,7 +114,6 @@ int	main(int argc, char **argv)
 		return (display_error(), 255);
 	if (!initialize_sigaction_struct(&sa_1, &sa_2))
 		return (display_error(), 255);
-	// ft_printf("Server PID: %i\n", server_pid);
 	sleep(1);
 	if (!transmission_loop(string_buff, &input_string, server_pid))
 		return (255);

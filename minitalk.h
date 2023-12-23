@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minitalk.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 08:26:17 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/20 17:52:09 by dan              ###   ########.fr       */
+/*   Updated: 2023/12/23 17:14:23 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ void	transmit_string_length(char string_buff[], pid_t server_pid);
 void	convert_string_length_to_binary(size_t string_length, pid_t server_pid);
 void	build_command_string(char command[], char *server_pid_str,
 			char *input_string);
+void	wait_signal(void);
 
 #endif
