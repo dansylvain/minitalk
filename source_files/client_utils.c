@@ -6,7 +6,7 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 06:34:05 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/23 11:01:07 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/23 11:48:35 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	initialize_sigaction_struct(struct sigaction *sa_1, struct sigaction *sa_2)
 	sa_1->sa_sigaction = client_signal_handler_1;
 	sigemptyset(&sa_1->sa_mask);
 	sa_1->sa_flags = SA_SIGINFO;
-	sa_2->sa_sigaction = client_signal_handler_2;
+	sa_2->sa_sigaction = client_signal_handler_1;
 	sigemptyset(&sa_2->sa_mask);
 	sa_2->sa_flags = SA_SIGINFO;
 	if (sigaction(SIGUSR1, sa_1, NULL) == -1)
