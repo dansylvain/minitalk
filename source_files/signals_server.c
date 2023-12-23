@@ -6,7 +6,7 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 07:22:27 by dan               #+#    #+#             */
-/*   Updated: 2023/12/23 11:49:15 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/23 15:46:45 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ void	server_signal_handler(int signal_number,
 		if (signal_number == 10)
 		{
 			g_server_binary[0] = 0;
-			ft_printf("incoming SIGUSR1\n");
+			// ft_printf("incoming SIGUSR1\n");
 		}
 		else
 		{
 			g_server_binary[0] = 1;
-			ft_printf("incoming SIGUSR2\n");
+			// ft_printf("incoming SIGUSR2\n");
 		}
 	}
 	

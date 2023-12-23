@@ -6,7 +6,7 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/23 15:34:34 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/23 16:42:21 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ int	server_parse_args(int argc, char **argv, char **input_string)
 int	start_client(char *input_string, pid_t server_pid)
 {
 	pid_t	child_pid;
-	char	command[20000];
+	char	command[100000];
 	char	*server_pid_str;
 	int		i;
 
-	ft_memset(command, '\0', 20000);
+	ft_memset(command, '\0', 100000);
 	server_pid_str = ft_itoa(server_pid);
 	build_command_string(command, server_pid_str, input_string);
 	free (server_pid_str);
@@ -60,7 +60,7 @@ int	get_string_length_transmission(void)
 	int	i;
 	int	input_string_length;
 
-	ft_printf("get_string_length_transmission\n");
+	// ft_printf("get_string_length_transmission\n");
 	input_string_length = 0;
 	i = 23;
 	while (i >= 0)
@@ -71,10 +71,10 @@ int	get_string_length_transmission(void)
 		input_string_length |= g_server_binary[0];
 		g_server_binary[0] = -1;
 		kill(g_server_binary[1], SIGUSR2);
-		ft_printf("emitting SIGUSR1\n");		
+		usleep(300);
+		// ft_printf("emitting SIGUSR1\n");		
 		i--;
 	}
-	input_string_length -= 1;
 	return (input_string_length);
 }
 
@@ -88,22 +88,24 @@ int	listening_loop(char **input_string)
 	while (1)
 	{
 		input_string_len = 0;
-		ft_printf("start loop %i\n", g_server_binary[0]);
+		// ft_printf("start loop %i\n", g_server_binary[0]);
 		
 		
 
 		while (g_server_binary[0] == -1);
 		g_server_binary[0] = -1;
 		kill(g_server_binary[1], SIGUSR2);
-		ft_printf("emitting SIGUSR2\n");
-
+		// ft_printf("emitting SIGUSR2\n");
+		usleep(300);
 		input_string_len = get_string_length_transmission();
-		ft_printf("\ninput_string_length: %i\n", input_string_len);
-		ft_printf("g_server_binary[0]: %i\n", g_server_binary[0]);
+		ft_printf("input_string_length: %i\n", input_string_len);
+		// ft_printf("g_server_binary[0]: %i\n", g_server_binary[0]);
 		
 		*input_string = (char *)malloc(sizeof(char) * input_string_len);
 		if (!*input_string)
 			return (0);
+		kill(g_server_binary[1], SIGUSR2);
+		usleep(300);
 		free(*input_string);
 	}
 	return (1);
