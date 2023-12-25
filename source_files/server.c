@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/23 18:18:19 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/25 07:46:42 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	listening_loop(char **input_string)
 		ft_printf("input_string_len: %i\n", input_string_len);
 		if (input_string_len)
 		{
-			*input_string = (char *)ft_calloc(input_string_len, sizeof(char));
+			*input_string = (char *)ft_calloc(input_string_len + 1, sizeof(char));
 			if (!*input_string)
 				return (0);
 			ft_memset(*input_string, 'a', input_string_len);
@@ -111,9 +111,11 @@ int	listening_loop(char **input_string)
 			*input_string = NULL;
 		kill(g_server_binary[1], SIGUSR2);
 		// get_input_string_transmission(input_string);
-		// ft_printf("%s", *input_string);
 		if (*input_string)
+		{
+			ft_printf("%s\n", *input_string);
 			free(*input_string);
+		}
 	}
 	return (1);
 }
