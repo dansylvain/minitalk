@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/25 08:13:08 by dan              ###   ########.fr       */
+/*   Updated: 2023/12/27 11:07:43 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,49 +59,43 @@ int	start_client(char *input_string, pid_t server_pid)
 int	get_string_length_transmission(void)
 {
 	int	i;
-	int	input_string_length;
+	int	input_string_len;
 
-	input_string_length = 0;
+	input_string_len = 0;
 	i = 23;
 	while (i >= 0)
 	{
 		while (g_server_binary[0] == -1)
 		{
 		}
-		input_string_length = input_string_length << 1;
-		input_string_length |= g_server_binary[0];
+		input_string_len = input_string_len << 1;
+		input_string_len |= g_server_binary[0];
 		g_server_binary[0] = -1;
 		kill(g_server_binary[1], SIGUSR2);
-		usleep(300);
 		i--;
 	}
-	return (input_string_length);
+	return (input_string_len);
 }
 
-void	get_input_string_transmission(char **input_string, int input_string_len)
+char	get_char_transmission()
 {
 	int i;
-	int j;
-	int octet;
-	
-	i = 0;
-	j = 7;
-	octet = 0;
-	g_server_binary[0] == -1;
-	while (i < input_string_len)
+	char c;
+
+	c = 0;
+	i = 7;
+	while (i >= 0)
 	{
-		while (j >= 0)
+		while (g_server_binary[0] == -1)
 		{
-			wait_signal_server();
-			octet = octet << 1;
-			octet |= g_server_binary[0];
-			g_server_binary[0] = -1;
-			kill(g_server_binary[1], SIGUSR2);
-			j--;
 		}
+		c = c << 1;
+		c |= g_server_binary[0];
+		g_server_binary[0] = -1;
+		kill(g_server_binary[1], SIGUSR2);
 		i--;
 	}
-	usleep(300);
+	return (c);
 }
 
 // TODO: detect End Of Transmission to cancel mask
@@ -127,12 +121,17 @@ int	listening_loop(char **input_string)
 		}
 		else
 			*input_string = NULL;
+		usleep(10000);
+
 		kill(g_server_binary[1], SIGUSR2);
-		get_input_string_transmission(input_string, input_string_len);
+		// char c = get_char_transmission();
+		// ft_printf("char: >%c<\n", c);
+		// get_input_string_transmission(input_string, input_string_len);
 		if (*input_string)
 		{
 			ft_printf("%s\n", *input_string);
 			free(*input_string);
+			*input_string = NULL;
 		}
 	}
 	return (1);

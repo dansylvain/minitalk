@@ -6,7 +6,7 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 06:34:05 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/23 17:15:05 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/27 10:01:01 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,5 @@ void	wait_signal(void)
 	while (g_client_binary == 0)
 	{
 	}
+	g_client_binary = 0;
 }
