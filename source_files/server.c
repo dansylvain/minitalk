@@ -6,7 +6,7 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/27 13:12:18 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/27 13:18:37 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,62 +56,18 @@ int	start_client(char *input_string, pid_t server_pid)
 }
 
 //! I used usleep(300) after signal emission to fix issues
-int	get_string_length_transmission(void)
-{
-	int	i;
-	int	input_string_len;
 
-	input_string_len = 0;
-	i = 23;
-	while (i >= 0)
+void	display_input_string(char *input_string)
+{
+	if (input_string)
 	{
-		while (g_server_binary[0] == -1)
-		{
-		}
-		input_string_len = input_string_len << 1;
-		input_string_len |= g_server_binary[0];
-		g_server_binary[0] = -1;
+		ft_printf("%s\n", input_string);
 		kill(g_server_binary[1], SIGUSR2);
-		i--;
+		free(input_string);
+		input_string = NULL;
 	}
-	return (input_string_len);
 }
 
-char	get_char_transmission(void)
-{
-	int	i;
-	int	c;
-
-	c = 0;
-	i = 7;
-	while (i >= 0)
-	{
-		while (g_server_binary[0] == -1)
-		{
-		}
-		c = c << 1;
-		c |= g_server_binary[0];
-		g_server_binary[0] = -1;
-		kill(g_server_binary[1], SIGUSR2);
-		i--;
-	}
-	return (c);
-}
-
-char	*get_input_string_transmission(char **input_string,
-		int input_string_len)
-{
-	int	i;
-
-	i = 0;
-	while (i < input_string_len)
-	{
-		(*input_string)[i] = get_char_transmission();
-		i++;
-	}
-	return (*input_string);
-}
-	
 // TODO: detect End Of Transmission to cancel mask
 // TODO: set client_pid = -1 to cancel mask
 // TODO: send a reception confirmation to client after printing message
@@ -128,7 +84,8 @@ int	listening_loop(char **input_string)
 		input_string_len = get_string_length_transmission();
 		if (input_string_len)
 		{
-			*input_string = (char *)ft_calloc(input_string_len + 1, sizeof(char));
+			*input_string = (char *)ft_calloc(input_string_len + 1,
+					sizeof(char));
 			if (!*input_string)
 				return (0);
 			ft_memset(*input_string, '0', input_string_len);
@@ -138,13 +95,7 @@ int	listening_loop(char **input_string)
 		usleep(10000);
 		kill(g_server_binary[1], SIGUSR2);
 		get_input_string_transmission(input_string, input_string_len);
-		if (*input_string)
-		{
-			ft_printf("%s\n", *input_string);
-			kill(g_server_binary[1], SIGUSR2);
-			free(*input_string);
-			*input_string = NULL;
-		}
+		display_input_string(*input_string);
 	}
 	return (1);
 }

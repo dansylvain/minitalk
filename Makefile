@@ -9,6 +9,7 @@ FT_PRINTF = ft_printf/libftprintf.a
 SRC_SERVER =	source_files/server.c \
 				source_files/signals_server.c \
 				source_files/server_utils.c \
+				source_files/server_transmission.c \
 
 SRC_CLIENT = 	source_files/client.c \
 				source_files/signals_client.c \
