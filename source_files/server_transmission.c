@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server_transmission.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 13:17:38 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/27 13:18:32 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/27 17:14:43 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	get_char_transmission(void)
 	return (c);
 }
 
-char	*get_input_string_transmission(char **input_string,
+void	get_input_string_transmission(char **input_string,
 		int input_string_len)
 {
 	int	i;
@@ -65,5 +65,4 @@ char	*get_input_string_transmission(char **input_string,
 		(*input_string)[i] = get_char_transmission();
 		i++;
 	}
-	return (*input_string);
 }

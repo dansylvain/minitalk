@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/27 13:18:37 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/27 17:35:10 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ int	listening_loop(char **input_string)
 		kill(g_server_binary[1], SIGUSR2);
 		get_input_string_transmission(input_string, input_string_len);
 		display_input_string(*input_string);
+		usleep(10000);
+		kill(g_server_binary[1], SIGUSR2);
 	}
 	return (1);
 }

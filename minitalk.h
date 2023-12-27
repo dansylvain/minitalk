@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minitalk.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 08:26:17 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/27 13:21:32 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/27 17:15:01 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	wait_signal(void);
 void	wait_signal_server(void);
 int		transmission_loop(char string_buff[], char **input_string,
 			pid_t server_pid);
-char	*get_input_string_transmission(char **input_string,
+void	get_input_string_transmission(char **input_string,
 			int input_string_len);
 int		get_string_length_transmission(void);
 

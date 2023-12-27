@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client_transmission.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 12:56:35 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/27 13:01:14 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/27 17:19:14 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,11 @@ void	transmit_string_buff(char string_buff[], pid_t server_pid)
 	wait_signal();
 	transmit_string(string_buff, server_pid, string_length);
 	wait_signal();
-	usleep(10000);
-	ft_printf("TRANSMISSION COMPLETE\n");
+	// usleep(10000);
+	ft_memset(string_buff, '\0', 100000);
 	g_client_binary = 0;
 }
 
-// TODO: emission of '\0' to signal End Of Transmission
 int	transmission_loop(char string_buff[], char **input_string, pid_t server_pid)
 {
 	int					bytes_read;
@@ -105,15 +104,23 @@ int	transmission_loop(char string_buff[], char **input_string, pid_t server_pid)
 	while (1)
 	{
 		if (string_buff[0])
+		{
 			transmit_string_buff(string_buff, server_pid);
+			wait_signal();
+			ft_printf("TRANSMISSION COMPLETE\n");
+		}
 		ft_printf("> ");
 		bytes_read = read(0, string_buff, 100000);
 		if (bytes_read == -1)
 			return (0);
+		if (bytes_read == 1)
+		{
+			ft_memset(string_buff, '\0', 100000);
+			continue;
+		}
 		if (bytes_read == 0 || !string_buff[0])
 			return (0);
-		else
-			string_buff[bytes_read] = '\0';
+		
 		input_string = NULL;
 	}
 	return (1);
