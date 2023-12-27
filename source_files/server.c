@@ -6,7 +6,7 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/27 11:57:44 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/27 13:12:18 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,10 @@ int	get_string_length_transmission(void)
 	return (input_string_len);
 }
 
-char	get_char_transmission()
+char	get_char_transmission(void)
 {
-	int i;
-	int c;
+	int	i;
+	int	c;
 
 	c = 0;
 	i = 7;
@@ -98,21 +98,20 @@ char	get_char_transmission()
 	return (c);
 }
 
-char	*get_input_string_transmission(char **input_string, int input_string_len)
+char	*get_input_string_transmission(char **input_string,
+		int input_string_len)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	while (i < input_string_len)
 	{
 		(*input_string)[i] = get_char_transmission();
 		i++;
 	}
-
 	return (*input_string);
 }
-
-
+	
 // TODO: detect End Of Transmission to cancel mask
 // TODO: set client_pid = -1 to cancel mask
 // TODO: send a reception confirmation to client after printing message
@@ -122,11 +121,11 @@ int	listening_loop(char **input_string)
 
 	while (1)
 	{
+		g_server_binary[0] = -1;
 		input_string_len = 0;
 		wait_signal_server();
 		kill(g_server_binary[1], SIGUSR2);
 		input_string_len = get_string_length_transmission();
-		ft_printf("input_string_len: %i\n", input_string_len);
 		if (input_string_len)
 		{
 			*input_string = (char *)ft_calloc(input_string_len + 1, sizeof(char));
@@ -137,16 +136,12 @@ int	listening_loop(char **input_string)
 		else
 			*input_string = NULL;
 		usleep(10000);
-
 		kill(g_server_binary[1], SIGUSR2);
-		// wait_signal_server();
 		get_input_string_transmission(input_string, input_string_len);
-		ft_printf("input_string : %s\n", *input_string);
-		// char c = get_char_transmission();
-		// ft_printf("char: >%c<\n", c);
 		if (*input_string)
 		{
 			ft_printf("%s\n", *input_string);
+			kill(g_server_binary[1], SIGUSR2);
 			free(*input_string);
 			*input_string = NULL;
 		}

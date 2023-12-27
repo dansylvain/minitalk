@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 05:47:16 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/25 08:07:18 by dan              ###   ########.fr       */
+/*   Updated: 2023/12/27 13:01:42 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	display_error(void)
 void	wait_signal_server(void)
 {
 	while (g_server_binary[0] == -1)
-		{
-		}
+	{
+	}
 	g_server_binary[0] = -1;
 }
 
