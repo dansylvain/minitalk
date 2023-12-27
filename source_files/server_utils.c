@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 05:47:16 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/20 12:32:02 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/25 08:07:18 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,14 @@
 void	display_error(void)
 {
 	write(2, "Error\n", 6);
+}
+
+void	wait_signal_server(void)
+{
+	while (g_server_binary[0] == -1)
+		{
+		}
+	g_server_binary[0] = -1;
 }
 
 int	initialize_sigaction_struct(struct sigaction *sa_1, struct sigaction *sa_2)

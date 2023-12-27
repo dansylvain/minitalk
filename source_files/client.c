@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/23 18:17:24 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/25 07:58:43 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	transmit_string_length(char string_buff[], pid_t server_pid)
 	i = 23;
 	while (i >= 0)
 	{
-		g_client_binary = 0;
+		// g_client_binary = 0;
 		bit = (string_length >> i) & 1;
 		if (bit == 0)
 		{
@@ -71,7 +71,7 @@ void	transmit_char(char octet, int server_pid)
 	bit = 0;
 	while (i >= 0)
 	{
-		g_client_binary = 0;
+		// g_client_binary = 0;
 		bit = (octet >> i) & 1;
 		if (bit == 0)
 		{
@@ -95,7 +95,7 @@ void	transmit_string(char string_buff[], pid_t server_pid, int string_length)
 	i = 0;
 	while (string_buff[i])
 	{
-		transmit_char(string_buff[i], server_pid);
+		// transmit_char(string_buff[i], server_pid);
 		ft_printf("%c", string_buff[i]);
 		i++;
 	}
@@ -114,7 +114,7 @@ void	transmit_string_buff(char string_buff[], pid_t server_pid)
 	g_client_binary = 0;
 	string_length = transmit_string_length(string_buff, server_pid);
 	wait_signal();
-	// transmit_string(string_buff, server_pid, string_length);
+	transmit_string(string_buff, server_pid, string_length);
 	// ft_printf("transmit data\n");
 	g_client_binary = 0;
 }
