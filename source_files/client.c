@@ -6,7 +6,7 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/27 11:07:54 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/27 11:26:09 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,20 @@ int	transmit_string_length(char string_buff[], pid_t server_pid)
 	return (string_length);
 }
 
+
+// void	transmit_string(char string_buff[], pid_t server_pid, int string_length)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (string_buff[i])
+// 	{
+// 		transmit_char(string_buff[i], server_pid);
+// 		ft_printf("%c", string_buff[i]);
+// 		i++;
+// 	}
+// }
+
 void	transmit_char(char octet, int server_pid)
 {
 	int		i;
@@ -86,19 +100,6 @@ void	transmit_char(char octet, int server_pid)
 	}
 }
 
-void	transmit_string(char string_buff[], pid_t server_pid, int string_length)
-{
-	int	i;
-
-	i = 0;
-	while (string_buff[i])
-	{
-		transmit_char(string_buff[i], server_pid);
-		ft_printf("%c", string_buff[i]);
-		i++;
-	}
-}
-
 void	transmit_string_buff(char string_buff[], pid_t server_pid)
 {
 	int	string_length;
@@ -112,8 +113,8 @@ void	transmit_string_buff(char string_buff[], pid_t server_pid)
 	g_client_binary = 0;
 	string_length = transmit_string_length(string_buff, server_pid);
 	wait_signal();
-	// ft_printf("char: >%c<\n", string_buff[0]);
-	// transmit_char(string_buff[0], server_pid);
+	ft_printf("char: >%c<\nserver_pid: %i\n", string_buff[0], server_pid);
+	transmit_char(string_buff[0], server_pid);
 	// transmit_string(string_buff, server_pid, string_length);
 	// ft_printf("transmit data\n");
 	g_client_binary = 0;

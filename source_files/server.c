@@ -6,7 +6,7 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/27 11:07:43 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/27 11:26:40 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	get_string_length_transmission(void)
 char	get_char_transmission()
 {
 	int i;
-	char c;
+	int c;
 
 	c = 0;
 	i = 7;
@@ -124,8 +124,8 @@ int	listening_loop(char **input_string)
 		usleep(10000);
 
 		kill(g_server_binary[1], SIGUSR2);
-		// char c = get_char_transmission();
-		// ft_printf("char: >%c<\n", c);
+		char c = get_char_transmission();
+		ft_printf("char: >%c<\n", c);
 		// get_input_string_transmission(input_string, input_string_len);
 		if (*input_string)
 		{
