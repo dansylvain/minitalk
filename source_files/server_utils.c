@@ -6,7 +6,7 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 05:47:16 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/27 13:01:42 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/28 05:48:00 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,24 +40,25 @@ int	initialize_sigaction_struct(struct sigaction *sa_1, struct sigaction *sa_2)
 	return (1);
 }
 
-void	build_command_string(char command[], char *server_pid_str,
-	char *input_string)
-{
-	char	quote[2];
-	char	space[2];
+//? add this function for minitalk V2
+// void	build_command_string(char command[], char *server_pid_str,
+// 	char *input_string)
+// {
+// 	char	quote[2];
+// 	char	space[2];
 
-	quote[0] = '\"';
-	quote[1] = '\0';
-	space[0] = ' ';
-	space[1] = '\0';
-	ft_strlcat(command, "./client ", 10);
-	ft_strlcat(command, server_pid_str, 10 + ft_strlen(server_pid_str));
-	if (input_string)
-	{
-		ft_strlcat(command, space, ft_strlen(command) + 2);
-		ft_strlcat(command, quote, ft_strlen(command) + 2);
-		ft_strlcat(command, input_string, ft_strlen(command)
-			+ ft_strlen(input_string) + 1);
-		ft_strlcat(command, quote, ft_strlen(command) + 2);
-	}
-}
+// 	quote[0] = '\"';
+// 	quote[1] = '\0';
+// 	space[0] = ' ';
+// 	space[1] = '\0';
+// 	ft_strlcat(command, "./client ", 10);
+// 	ft_strlcat(command, server_pid_str, 10 + ft_strlen(server_pid_str));
+// 	if (input_string)
+// 	{
+// 		ft_strlcat(command, space, ft_strlen(command) + 2);
+// 		ft_strlcat(command, quote, ft_strlen(command) + 2);
+// 		ft_strlcat(command, input_string, ft_strlen(command)
+// 			+ ft_strlen(input_string) + 1);
+// 		ft_strlcat(command, quote, ft_strlen(command) + 2);
+// 	}
+// }

@@ -6,7 +6,7 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 08:26:17 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/28 05:26:58 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/28 05:46:31 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,7 @@ void	get_input_string_transmission(char **input_string,
 			int input_string_len);
 int		get_string_length_transmission(void);
 int		listening_loop(char **input_string);
+int		create_input_string(char **input_string, int input_string_len);
+void	display_input_string(char *input_string);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/28 05:33:49 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/28 05:46:00 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,32 +51,6 @@ int	server_parse_args(int argc, char **argv, char **input_string)
 	return (1);
 }
 
-void	display_input_string(char *input_string)
-{
-	if (input_string)
-	{
-		ft_printf("%s\n", input_string);
-		kill(g_server_binary[1], SIGUSR2);
-		free(input_string);
-		input_string = NULL;
-	}
-}
-
-int	create_input_string(char **input_string, int input_string_len)
-{
-	if (input_string_len)
-	{
-		*input_string = (char *)ft_calloc(input_string_len + 1,
-				sizeof(char));
-		if (!*input_string)
-			return (0);
-		ft_memset(*input_string, '0', input_string_len);
-	}
-	else
-		*input_string = NULL;
-	return (1);
-}
-
 int	listening_loop(char **input_string)
 {
 	int	input_string_len;
@@ -98,6 +72,32 @@ int	listening_loop(char **input_string)
 		kill(g_server_binary[1], SIGUSR2);
 	}
 	return (1);
+}
+
+int	create_input_string(char **input_string, int input_string_len)
+{
+	if (input_string_len)
+	{
+		*input_string = (char *)ft_calloc(input_string_len + 1,
+				sizeof(char));
+		if (!*input_string)
+			return (0);
+		ft_memset(*input_string, '0', input_string_len);
+	}
+	else
+		*input_string = NULL;
+	return (1);
+}
+
+void	display_input_string(char *input_string)
+{
+	if (input_string)
+	{
+		ft_printf("%s\n", input_string);
+		kill(g_server_binary[1], SIGUSR2);
+		free(input_string);
+		input_string = NULL;
+	}
 }
 
 //? add this function for minitalk V2
