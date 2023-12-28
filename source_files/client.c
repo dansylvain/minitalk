@@ -6,7 +6,7 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/28 05:51:05 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/28 06:07:32 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 int	g_client_binary = 0;
 
+/**========================================================================
+ *                                  main
+ *========================================================================**/
 int	main(int argc, char **argv)
 {
 	pid_t				server_pid;
@@ -32,8 +35,11 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
+/**========================================================================
+ *                           client_parse_args
 //? replace condition with line below for minitalk V2
 // if (argc > 3 || argc == 1)
+ *========================================================================**/
 int	client_parse_args(int argc, char **argv, pid_t *server_pid,
 	char string_buff[])
 {

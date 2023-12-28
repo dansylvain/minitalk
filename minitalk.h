@@ -6,7 +6,7 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 08:26:17 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/28 05:46:31 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/28 06:14:21 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,9 @@ int		get_string_length_transmission(void);
 int		listening_loop(char **input_string);
 int		create_input_string(char **input_string, int input_string_len);
 void	display_input_string(char *input_string);
+void	transmit_string_buff(char string_buff[], pid_t server_pid);
+void	transmit_string(char string_buff[], pid_t server_pid,
+			int string_length);
+void	transmit_char(char octet, int server_pid);
 
 #endif

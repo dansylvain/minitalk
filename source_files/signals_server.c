@@ -6,13 +6,15 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 07:22:27 by dan               #+#    #+#             */
-/*   Updated: 2023/12/28 05:49:09 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/28 06:11:09 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minitalk.h"
 
-// TODO: add logic to filter processes transmission 
+/**========================================================================
+ *                           server_signal_handler
+ *========================================================================**/
 void	server_signal_handler(int signal_number,
 	siginfo_t *info, void *context)
 {

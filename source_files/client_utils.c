@@ -6,17 +6,23 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 06:34:05 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/27 10:01:01 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/28 06:06:17 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minitalk.h"
 
+/**========================================================================
+ *                           display_error
+ *========================================================================**/
 void	display_error(void)
 {
 	write(2, "Error\n", 6);
 }
 
+/**========================================================================
+ *                           is_valid_pid
+ *========================================================================**/
 int	is_valid_pid(char *argv_one)
 {
 	int	i;
@@ -40,6 +46,9 @@ int	is_valid_pid(char *argv_one)
 	return (1);
 }
 
+/**========================================================================
+ *                           initialize_sigaction_struct
+ *========================================================================**/
 int	initialize_sigaction_struct(struct sigaction *sa_1, struct sigaction *sa_2)
 {
 	sa_1->sa_sigaction = client_signal_handler_1;
@@ -55,6 +64,9 @@ int	initialize_sigaction_struct(struct sigaction *sa_1, struct sigaction *sa_2)
 	return (1);
 }
 
+/**========================================================================
+ *                           wait_signal
+ *========================================================================**/
 void	wait_signal(void)
 {
 	while (g_client_binary == 0)

@@ -6,12 +6,15 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 05:47:16 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/28 05:48:00 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/28 06:10:05 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minitalk.h"
 
+/**========================================================================
+ *                           display_error
+ *========================================================================**/
 void	display_error(void)
 {
 	write(2, "Error\n", 6);
@@ -25,6 +28,9 @@ void	wait_signal_server(void)
 	g_server_binary[0] = -1;
 }
 
+/**========================================================================
+ *                           initialize_sigaction_struct
+ *========================================================================**/
 int	initialize_sigaction_struct(struct sigaction *sa_1, struct sigaction *sa_2)
 {
 	sa_1->sa_sigaction = server_signal_handler;
@@ -40,7 +46,10 @@ int	initialize_sigaction_struct(struct sigaction *sa_1, struct sigaction *sa_2)
 	return (1);
 }
 
+/**========================================================================
+ *                           build_command_string
 //? add this function for minitalk V2
+ *========================================================================**/
 // void	build_command_string(char command[], char *server_pid_str,
 // 	char *input_string)
 // {

@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   server_transmission.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 13:17:38 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/27 17:14:43 by dan              ###   ########.fr       */
+/*   Updated: 2023/12/28 06:08:30 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minitalk.h"
 
+/**========================================================================
+ *                     get_string_length_transmission
+ *========================================================================**/
 int	get_string_length_transmission(void)
 {
 	int	i;
@@ -33,6 +36,9 @@ int	get_string_length_transmission(void)
 	return (input_string_len);
 }
 
+/**========================================================================
+ *                        get_char_transmission
+ *========================================================================**/
 char	get_char_transmission(void)
 {
 	int	i;
@@ -54,6 +60,9 @@ char	get_char_transmission(void)
 	return (c);
 }
 
+/**========================================================================
+ *                      get_input_string_transmission
+ *========================================================================**/
 void	get_input_string_transmission(char **input_string,
 		int input_string_len)
 {

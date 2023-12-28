@@ -6,7 +6,7 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/28 05:46:00 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/28 06:10:52 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 int	g_server_binary[2] = {-1, 0};
 
+/**========================================================================
+ *                           main
 //? add these two lines below initialize sigaction_struct for minitalk V2
 	// if (!start_client(input_string, server_pid))
 	// 	return (display_error(), 255);
+ *========================================================================**/
 int	main(int argc, char **argv)
 {
 	char				*input_string;
@@ -36,6 +39,9 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
+/**========================================================================
+ *                           server_parse_args
+ *========================================================================**/
 //? replace condition with line below for minitalk V2
 	// if (argc > 2)
 int	server_parse_args(int argc, char **argv, char **input_string)
@@ -51,6 +57,9 @@ int	server_parse_args(int argc, char **argv, char **input_string)
 	return (1);
 }
 
+/**========================================================================
+ *                           listening_loop
+ *========================================================================**/
 int	listening_loop(char **input_string)
 {
 	int	input_string_len;
@@ -74,6 +83,9 @@ int	listening_loop(char **input_string)
 	return (1);
 }
 
+/**========================================================================
+ *                           create_input_string
+ *========================================================================**/
 int	create_input_string(char **input_string, int input_string_len)
 {
 	if (input_string_len)
@@ -89,6 +101,9 @@ int	create_input_string(char **input_string, int input_string_len)
 	return (1);
 }
 
+/**========================================================================
+ *                           display_input_string
+ *========================================================================**/
 void	display_input_string(char *input_string)
 {
 	if (input_string)
@@ -100,7 +115,10 @@ void	display_input_string(char *input_string)
 	}
 }
 
+/**========================================================================
+ *                           start_client
 //? add this function for minitalk V2
+ *========================================================================**/
 // int	start_client(char *input_string, pid_t server_pid)
 // {
 // 	pid_t	child_pid;
