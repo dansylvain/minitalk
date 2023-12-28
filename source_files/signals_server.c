@@ -6,7 +6,7 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 07:22:27 by dan               #+#    #+#             */
-/*   Updated: 2023/12/28 06:11:09 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/28 06:40:20 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 /**========================================================================
  *                           server_signal_handler
+ *! logic added to restrict incoming signals to one client at a time
+ *! BUT mask to be added in sigaction struct
  *========================================================================**/
 void	server_signal_handler(int signal_number,
 	siginfo_t *info, void *context)

@@ -6,12 +6,16 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 12:56:35 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/28 06:03:43 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/28 06:31:24 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minitalk.h"
 
+/**========================================================================
+ *                         TRANSMISSION FUNCTIONS
+ *  function names self explanatory...
+ *========================================================================**/
 /**========================================================================
  *                           transmission_loop
  *? add these two lines below "TRANSMISSION COMPLETE" message for mitalk V2

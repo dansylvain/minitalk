@@ -6,7 +6,7 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/28 06:07:32 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/28 06:29:51 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@ int	g_client_binary = 0;
 
 /**========================================================================
  *                                  main
+ * stack is used to avoid unnecessary memory allocation
+ * for bigger project, malloc to be implemented
+ * although signals shouldn't be used for larger data set transmission
  *========================================================================**/
 int	main(int argc, char **argv)
 {

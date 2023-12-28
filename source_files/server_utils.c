@@ -6,7 +6,7 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 05:47:16 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/28 06:10:05 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/28 06:38:13 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ void	display_error(void)
 	write(2, "Error\n", 6);
 }
 
+/**========================================================================
+ *                           wait_signal_server
+ *========================================================================**/
 void	wait_signal_server(void)
 {
 	while (g_server_binary[0] == -1)
@@ -30,6 +33,8 @@ void	wait_signal_server(void)
 
 /**========================================================================
  *                           initialize_sigaction_struct
+ * flag SA_SIGINFO is used to get client pid
+ * sa_mask can be set to ignore signals
  *========================================================================**/
 int	initialize_sigaction_struct(struct sigaction *sa_1, struct sigaction *sa_2)
 {

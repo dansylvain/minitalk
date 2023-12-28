@@ -6,7 +6,7 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/28 06:10:52 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/28 06:44:42 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,18 @@
 
 int	g_server_binary[2] = {-1, 0};
 
+/**========================================================================
+ *                             MINITALK
+ *?  two version of the project are available
+ *?  comments show where to add/replace code to switch to version 2
+ *  version 1 complies with 42 project restrictions
+ *  version 2 expands it BUT uses forbidden functions (read and execlp)
+ *  signal filtering could be added on bigger project (see signals_server.c)
+ * 
+ * global variables:
+ * 		- server side : binary transmission value / client pid (table)
+ * 		- client side : transmission coordination binary (single value)
+ *========================================================================**/
 /**========================================================================
  *                           main
 //? add these two lines below initialize sigaction_struct for minitalk V2
@@ -41,9 +53,9 @@ int	main(int argc, char **argv)
 
 /**========================================================================
  *                           server_parse_args
- *========================================================================**/
 //? replace condition with line below for minitalk V2
 	// if (argc > 2)
+ *========================================================================**/
 int	server_parse_args(int argc, char **argv, char **input_string)
 {
 	if (argc > 1)
