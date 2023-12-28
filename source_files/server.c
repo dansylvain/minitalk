@@ -6,7 +6,7 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/28 07:55:57 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/28 08:26:01 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ int	listening_loop(char **input_string)
 
 	while (1)
 	{
+		if (g_server_binary[0] == -2)
+			return (0);
 		g_server_binary[0] = -1;
 		input_string_len = 0;
 		wait_signal_server();
