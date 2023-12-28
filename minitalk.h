@@ -6,7 +6,7 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 08:26:17 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/28 06:14:21 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/28 07:26:30 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include "libft/libft.h"
 # include "ft_printf/ft_printf.h"
 
-# define DELAY 1000
+# define DELAY 10000
 
 extern int	g_server_binary[2];
 extern int	g_client_binary;

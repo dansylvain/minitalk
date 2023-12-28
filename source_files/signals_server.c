@@ -6,7 +6,7 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 07:22:27 by dan               #+#    #+#             */
-/*   Updated: 2023/12/28 06:40:20 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/28 08:08:07 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@
 void	server_signal_handler(int signal_number,
 	siginfo_t *info, void *context)
 {
+	if (signal_number == 2)
+	{
+		g_server_binary[0] = -2;
+		return ;
+	}		
 	g_server_binary[0] = 0;
 	if (g_server_binary[0] == 0)
 		g_server_binary[1] = info->si_pid;

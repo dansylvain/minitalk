@@ -6,7 +6,7 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 05:47:16 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/28 06:38:13 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/28 08:08:31 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	wait_signal_server(void)
 	while (g_server_binary[0] == -1)
 	{
 	}
+	if (g_server_binary[0] == -2)
+		return ;
 	g_server_binary[0] = -1;
 }
 
@@ -41,12 +43,11 @@ int	initialize_sigaction_struct(struct sigaction *sa_1, struct sigaction *sa_2)
 	sa_1->sa_sigaction = server_signal_handler;
 	sigemptyset(&sa_1->sa_mask);
 	sa_1->sa_flags = SA_SIGINFO;
-	sa_2->sa_sigaction = server_signal_handler;
-	sigemptyset(&sa_2->sa_mask);
-	sa_2->sa_flags = SA_SIGINFO;
 	if (sigaction(SIGUSR1, sa_1, NULL) == -1)
 		return (0);
-	if (sigaction(SIGUSR2, sa_2, NULL) == -1)
+	if (sigaction(SIGUSR2, sa_1, NULL) == -1)
+		return (0);
+	if (sigaction(SIGINT, sa_1, NULL) == -1)
 		return (0);
 	return (1);
 }
