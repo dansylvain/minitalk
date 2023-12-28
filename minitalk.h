@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minitalk.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 08:26:17 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/27 17:15:01 by dan              ###   ########.fr       */
+/*   Updated: 2023/12/28 05:26:58 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <stdio.h>
 
 # include "libft/libft.h"
-# include "get_next_line/get_next_line.h"
 # include "ft_printf/ft_printf.h"
 
 # define DELAY 1000
@@ -56,5 +55,6 @@ int		transmission_loop(char string_buff[], char **input_string,
 void	get_input_string_transmission(char **input_string,
 			int input_string_len);
 int		get_string_length_transmission(void);
+int		listening_loop(char **input_string);
 
 #endif

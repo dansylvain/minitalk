@@ -14,8 +14,6 @@ SRC_SERVER =	source_files/server.c \
 SRC_CLIENT = 	source_files/client.c \
 				source_files/signals_client.c \
 				source_files/client_utils.c \
-				get_next_line/get_next_line.c \
-				get_next_line/get_next_line_utils.c \
 				source_files/client_transmission.c \
 				
 

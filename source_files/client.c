@@ -6,7 +6,7 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 08:45:49 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/12/27 12:56:15 by dsylvain         ###   ########.fr       */
+/*   Updated: 2023/12/28 05:29:43 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 int	g_client_binary = 0;
 
+//? replace condition with line below for minitalk V2
+// if (argc > 3 || argc == 1)
 int	client_parse_args(int argc, char **argv, pid_t *server_pid,
 	char string_buff[])
 {
-	if (argc > 3 || argc == 1)
+	if (argc != 3)
 		return (0);
 	if (!is_valid_pid(argv[1]))
 		return (0);
@@ -41,12 +43,10 @@ int	main(int argc, char **argv)
 	struct sigaction	sa_2;
 
 	ft_memset(string_buff, '\0', 100000);
-	ft_printf("client_pid: %i\n", getpid());
 	if (!client_parse_args(argc, argv, &server_pid, string_buff))
 		return (display_error(), 255);
 	if (!initialize_sigaction_struct(&sa_1, &sa_2))
 		return (display_error(), 255);
-	sleep(1);
 	if (!transmission_loop(string_buff, &input_string, server_pid))
 		return (255);
 	return (0);
